@@ -1,0 +1,19 @@
+version: '3'              # The version of yml we want to use 
+services:                 # What service we want to use 
+  web:                    # 
+    build:                
+      context: .                      # Were do we want all the files and folders to come from? Specify the directory of the project /frontend
+      dockerfile: Dockerfile.dev      # So Context looks for the Dockerfile.dev because dockerfile was overrided.
+    ports:              
+      - "3000:3000"       # '-' setting an array of port configurations 
+    volumes:              # The file mounts etc..
+      - /app/node_modules # do not try to map a folder up against app node_modules inside the container
+      - /d/GitHub/docker-kubernetis/frontend:/app   # Before the `:` we want the directory found there, to be mapped into `/app` ## In the tutorial he just put `.:/` but because of our recent error, we need to type in the correct directory like it is there
+  tests: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - /d/GitHub/docker-kubernetis/frontend:/app
+    command: ["npm","run","test"]
