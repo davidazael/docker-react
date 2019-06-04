@@ -2,11 +2,10 @@
 ## The configuration for the first block is pretty similar to the last ones like so:
 FROM node:alpine as builder
 WORKDIR /app
-COPY package.json .
+COPY package.json /app
 RUN npm install
-COPY . .
+COPY . /app
 RUN npm run build
-
 ## Sends we are not worried about instant updates, we don't need to copy over to /app, just to (`.`)
 ## The path to the folder of all the files we care about, will be in `/app/build` essentially what we want to copy over to the run face.
 ## To specify the start of a second phase we will need to do this. Notice there isn't any need for special syntax for a new base image Block. So, you can assume that each of this statements can only have a single function. FROM statements terminate the sections(block)
