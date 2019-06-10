@@ -3,7 +3,7 @@
 FROM node:alpine as builder
 WORKDIR /app
 COPY package.json /app
-RUN npm install
+RUN npm install --save querystringify
 COPY . /app
 RUN npm run build
 ## Sends we are not worried about instant updates, we don't need to copy over to /app, just to (`.`)
